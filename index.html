@@ -14,38 +14,25 @@
       overflow: hidden;
       background-color: #000;
     }
-    /* Responsive Fullscreen Video Container */
-    .vimeo-wrapper {
+    #bg-video {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    .vimeo-wrapper iframe {
-      width: 100vw;
-      height: 56.25vw; /* 16:9 Aspect Ratio */
-      min-height: 100vh;
-      min-width: 177.77vh; /* 16:9 Aspect Ratio */
-      position: absolute;
       top: 50%;
       left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
       transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
 
-  <div class="vimeo-wrapper">
-    <iframe 
-      src="https://player.vimeo.com/video/1225807278?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1" 
-      frameborder="0" 
-      allow="autoplay; fullscreen" 
-      allowfullscreen>
-    </iframe>
-  </div>
+  <video autoplay loop muted playsinline id="bg-video">
+    <source src="20260911-0145-53.2090122.mp4" type="video/mp4">
+  </video>
 
 </body>
 </html>
