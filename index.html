@@ -31,5 +31,36 @@
     <source src="20260911-0145-53.2090122.mp4" type="video/mp4">
   </video>
 
+  <script>
+    var v = document.getElementById('bg-video');
+
+    function log(msg) {
+      console.log('[bg-video] ' + msg);
+    }
+
+    v.addEventListener('loadedmetadata', function () {
+      log('loadedmetadata - ' + v.videoWidth + 'x' + v.videoHeight + ' duration=' + v.duration);
+    });
+    v.addEventListener('loadeddata', function () { log('loadeddata'); });
+    v.addEventListener('playing', function () { log('playing'); });
+    v.addEventListener('stalled', function () { log('stalled'); });
+    v.addEventListener('suspend', function () { log('suspend'); });
+    v.addEventListener('waiting', function () { log('waiting - buffering'); });
+    v.addEventListener('error', function () {
+      var err = v.error;
+      log('error code=' + (err ? err.code : 'unknown') + ' message=' + (err ? err.message : ''));
+    });
+
+    // Some embedded browsers (GMod's included) don't reliably honor the autoplay attribute - force it.
+    var playPromise = v.play();
+    if (playPromise !== undefined) {
+      playPromise.then(function () {
+        log('play() resolved');
+      }).catch(function (e) {
+        log('play() rejected: ' + e);
+      });
+    }
+  </script>
+
 </body>
 </html>
